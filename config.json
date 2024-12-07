@@ -1,6 +1,6 @@
 {
-    "adaboost-pickle": "C:/Users/Yubraj/Desktop/ml-two_deployment/model/Adaboost-Model.pkl",
-    "oneclasssvm-pickle": "C:/Users/Yubraj/Desktop/ml-two_deployment/model/one_class_svm_model.pkl",
-    "ann-tanh-pickle": "C:/Users/Yubraj/Desktop/ml-two_deployment/model/ann_tanh_model.h5"
+    "adaboost-pickle": "model/Adaboost-Model.pkl",
+    "oneclasssvm-pickle": "model/one_class_svm_model.pkl",
+    "ann-tanh-pickle": "model/ann_tanh_model.h5"
   }
   
