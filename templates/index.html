@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select, button {
+            margin: 5px 0;
+            padding: 8px;
+            width: 100%;
+            max-width: 300px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Enter Features for Prediction</h1>
+        <form id="prediction-form" method="POST" action="/predict_adaboost">
+
+            <!-- Checkbox fields for boolean features -->
+            <label for="Alcohol">Alcohol:</label>
+            <input type="checkbox" id="Alcohol" name="Alcohol"><br>
+
+            <label for="OutdoorSeating">Outdoor Seating:</label>
+            <input type="checkbox" id="OutdoorSeating" name="OutdoorSeating"><br>
+
+            <label for="WiFi">WiFi:</label>
+            <input type="checkbox" id="WiFi" name="WiFi"><br>
+
+            <label for="NoiseLevel">Noise Level:</label>
+            <input type="checkbox" id="NoiseLevel" name="NoiseLevel"><br>
+
+            <label for="Ambience">Ambience:</label>
+            <input type="checkbox" id="Ambience" name="Ambience"><br>
+
+            <label for="Shopping">Shopping:</label>
+            <input type="checkbox" id="Shopping" name="Shopping"><br>
+
+            <label for="Beauty & Spas">Beauty & Spas:</label>
+            <input type="checkbox" id="Beauty & Spas" name="Beauty & Spas"><br>
+
+            <label for="Food">Food:</label>
+            <input type="checkbox" id="Food" name="Food"><br>
+
+            <label for="Restaurants">Restaurants:</label>
+            <input type="checkbox" id="Restaurants" name="Restaurants"><br>
+
+            <label for="Home & Garden">Home & Garden:</label>
+            <input type="checkbox" id="Home & Garden" name="Home & Garden"><br>
+
+            <label for="Local Services">Local Services:</label>
+            <input type="checkbox" id="Local Services" name="Local Services"><br>
+
+            <label for="Fashion">Fashion:</label>
+            <input type="checkbox" id="Fashion" name="Fashion"><br>
+
+            <label for="Home Services">Home Services:</label>
+            <input type="checkbox" id="Home Services" name="Home Services"><br>
+
+            <label for="Hair Salons">Hair Salons:</label>
+            <input type="checkbox" id="Hair Salons" name="Hair Salons"><br>
+
+            <label for="Nail Salons">Nail Salons:</label>
+            <input type="checkbox" id="Nail Salons" name="Nail Salons"><br>
+
+            <label for="Event Planning & Services">Event Planning & Services:</label>
+            <input type="checkbox" id="Event Planning & Services" name="Event Planning & Services"><br>
+
+            <label for="Fast Food">Fast Food:</label>
+            <input type="checkbox" id="Fast Food" name="Fast Food"><br>
+
+            <label for="Health & Medical">Health & Medical:</label>
+            <input type="checkbox" id="Health & Medical" name="Health & Medical"><br>
+
+            <label for="Flowers & Gifts">Flowers & Gifts:</label>
+            <input type="checkbox" id="Flowers & Gifts" name="Flowers & Gifts"><br>
+
+            <label for="Pizza">Pizza:</label>
+            <input type="checkbox" id="Pizza" name="Pizza"><br>
+
+            <label for="Women's Clothing">Women's Clothing:</label>
+            <input type="checkbox" id="Women's Clothing" name="Women's Clothing"><br>
+
+            <label for="Home Decor">Home Decor:</label>
+            <input type="checkbox" id="Home Decor" name="Home Decor"><br>
+
+            <label for="Electronics">Electronics:</label>
+            <input type="checkbox" id="Electronics" name="Electronics"><br>
+
+            <label for="Sandwiches">Sandwiches:</label>
+            <input type="checkbox" id="Sandwiches" name="Sandwiches"><br>
+
+            <label for="Furniture Stores">Furniture Stores:</label>
+            <input type="checkbox" id="Furniture Stores" name="Furniture Stores"><br>
+
+            <label for="Jewelry">Jewelry:</label>
+            <input type="checkbox" id="Jewelry" name="Jewelry"><br>
+
+            <label for="Accessories">Accessories:</label>
+            <input type="checkbox" id="Accessories" name="Accessories"><br>
+
+            <label for="Specialty Food">Specialty Food:</label>
+            <input type="checkbox" id="Specialty Food" name="Specialty Food"><br>
+
+            <label for="IT Services & Computer Repair">IT Services & Computer Repair:</label>
+            <input type="checkbox" id="IT Services & Computer Repair" name="IT Services & Computer Repair"><br>
+
+            <label for="Hair Removal">Hair Removal:</label>
+            <input type="checkbox" id="Hair Removal" name="Hair Removal"><br>
+
+            <label for="Cosmetics & Beauty Supply">Cosmetics & Beauty Supply:</label>
+            <input type="checkbox" id="Cosmetics & Beauty Supply" name="Cosmetics & Beauty Supply"><br>
+
+            <label for="Florists">Florists:</label>
+            <input type="checkbox" id="Florists" name="Florists"><br>
+
+            <label for="Sporting Goods">Sporting Goods:</label>
+            <input type="checkbox" id="Sporting Goods" name="Sporting Goods"><br>
+
+            <label for="Mobile Phones">Mobile Phones:</label>
+            <input type="checkbox" id="Mobile Phones" name="Mobile Phones"><br>
+
+            <label for="Arts & Entertainment">Arts & Entertainment:</label>
+            <input type="checkbox" id="Arts & Entertainment" name="Arts & Entertainment"><br>
+
+            <label for="Eyewear & Opticians">Eyewear & Opticians:</label>
+            <input type="checkbox" id="Eyewear & Opticians" name="Eyewear & Opticians"><br>
+
+            <label for="Barbers">Barbers:</label>
+            <input type="checkbox" id="Barbers" name="Barbers"><br>
+
+            <label for="Coffee & Tea">Coffee & Tea:</label>
+            <input type="checkbox" id="Coffee & Tea" name="Coffee & Tea"><br>
+
+            <label for="Optometrists">Optometrists:</label>
+            <input type="checkbox" id="Optometrists" name="Optometrists"><br>
+
+            <label for="Banks & Credit Unions">Banks & Credit Unions:</label>
+            <input type="checkbox" id="Banks & Credit Unions" name="Banks & Credit Unions"><br>
+
+            <!-- Days of the Week Open -->
+            <label for="Monday_Open">Monday Open:</label>
+            <input type="checkbox" id="Monday_Open" name="Monday_Open"><br>
+
+            <label for="Tuesday_Open">Tuesday Open:</label>
+            <input type="checkbox" id="Tuesday_Open" name="Tuesday_Open"><br>
+
+            <label for="Wednesday_Open">Wednesday Open:</label>
+            <input type="checkbox" id="Wednesday_Open" name="Wednesday_Open"><br>
+
+            <label for="Thursday_Open">Thursday Open:</label>
+            <input type="checkbox" id="Thursday_Open" name="Thursday_Open"><br>
+
+            <label for="Friday_Open">Friday Open:</label>
+            <input type="checkbox" id="Friday_Open" name="Friday_Open"><br>
+
+            <label for="Saturday_Open">Saturday Open:</label>
+            <input type="checkbox" id="Saturday_Open" name="Saturday_Open"><br>
+
+            <label for="Sunday_Open">Sunday Open:</label>
+            <input type="checkbox" id="Sunday_Open" name="Sunday_Open"><br>
+
+            <label for="stars">Stars:</label>
+            <input type="number" id="stars" name="stars" step="any" required><br>
+
+            <!-- Submit Button -->
+            <button type="submit">Submit</button>
+            <button type="button" onclick="randomizeFields()">Randomize Values</button>
+        </form>
+
+        <!-- Display Prediction Result -->
+        <div class="result" id="result">
+            <!-- Prediction result will appear here -->
+        </div>
+    </div>
+
+    <script>
+        // Function to generate random values for the input fields
+        function randomizeFields() {
+            const fields = [
+                "Alcohol", "OutdoorSeating", "WiFi", "NoiseLevel", "Ambience", "Shopping", "Beauty & Spas", "Food", 
+                "Restaurants", "Home & Garden", "Local Services", "Fashion", "Home Services", "Hair Salons", "Nail Salons", 
+                "Event Planning & Services", "Fast Food", "Health & Medical", "Flowers & Gifts", "Pizza", "Women's Clothing", 
+                "Home Decor", "Electronics", "Sandwiches", "Furniture Stores", "Jewelry", "Accessories", "Specialty Food", 
+                "IT Services & Computer Repair", "Hair Removal", "Cosmetics & Beauty Supply", "Florists", "Sporting Goods", 
+                "Mobile Phones", "Arts & Entertainment", "Eyewear & Opticians", "Barbers", "Coffee & Tea", "Optometrists", 
+                "Banks & Credit Unions", "Monday_Open", "Tuesday_Open", "Wednesday_Open", "Thursday_Open", "Friday_Open", 
+                "Saturday_Open", "Sunday_Open"
+            ];
+            
+            fields.forEach(function(field) {
+                let checkbox = document.getElementById(field);
+                checkbox.checked = Math.random() < 0.5; // Randomly check or uncheck
+            });
+        }
+    </script>
+
+</body>
+</html>

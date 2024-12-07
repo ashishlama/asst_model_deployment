@@ -1,0 +1,6 @@
+flask
+numpy
+pandas
+Pillow
+gunicorn
+tensorflow==2.18.0

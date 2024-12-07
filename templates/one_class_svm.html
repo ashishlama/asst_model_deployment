@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One-Class SVM Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select, button {
+            margin: 5px 0;
+            padding: 8px;
+            width: 100%;
+            max-width: 300px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Enter Features for One-Class SVM Prediction</h1>
+        <form id="svm-prediction-form" method="POST" action="/predict_oneclass_svm">
+            
+            <!-- Input fields for each feature -->
+            <label for="latitude">Latitude:</label>
+            <input type="number" id="latitude" name="latitude" step="any" required><br>
+
+            <label for="longitude">Longitude:</label>
+            <input type="number" id="longitude" name="longitude" step="any" required><br>
+
+            <label for="stars">Stars:</label>
+            <input type="number" id="stars" name="stars" step="any" required><br>
+
+            <label for="review_count">Review Count:</label>
+            <input type="number" id="review_count" name="review_count" required><br>
+
+            <!-- Boolean fields as checkboxes -->
+            <label for="is_open">Is Open:</label>
+            <input type="checkbox" id="is_open" name="is_open"><br>
+
+            <label for="ByAppointmentOnly">By Appointment Only:</label>
+            <input type="checkbox" id="ByAppointmentOnly" name="ByAppointmentOnly"><br>
+
+            <label for="BusinessAcceptsCreditCards">Business Accepts Credit Cards:</label>
+            <input type="checkbox" id="BusinessAcceptsCreditCards" name="BusinessAcceptsCreditCards"><br>
+
+            <label for="BikeParking">Bike Parking:</label>
+            <input type="checkbox" id="BikeParking" name="BikeParking"><br>
+
+            <label for="RestaurantsPriceRange2">Restaurants Price Range 2:</label>
+            <input type="number" id="RestaurantsPriceRange2" name="RestaurantsPriceRange2" required><br>
+
+            <label for="CoatCheck">Coat Check:</label>
+            <input type="checkbox" id="CoatCheck" name="CoatCheck"><br>
+
+            <label for="RestaurantsTakeOut">Restaurants Take Out:</label>
+            <input type="checkbox" id="RestaurantsTakeOut" name="RestaurantsTakeOut"><br>
+
+            <label for="RestaurantsDelivery">Restaurants Delivery:</label>
+            <input type="checkbox" id="RestaurantsDelivery" name="RestaurantsDelivery"><br>
+
+            <label for="Caters">Caters:</label>
+            <input type="checkbox" id="Caters" name="Caters"><br>
+
+            <label for="WheelchairAccessible">Wheelchair Accessible:</label>
+            <input type="checkbox" id="WheelchairAccessible" name="WheelchairAccessible"><br>
+
+            <label for="HappyHour">Happy Hour:</label>
+            <input type="checkbox" id="HappyHour" name="HappyHour"><br>
+
+            <label for="OutdoorSeating">Outdoor Seating:</label>
+            <input type="checkbox" id="OutdoorSeating" name="OutdoorSeating"><br>
+
+            <label for="HasTV">Has TV:</label>
+            <input type="checkbox" id="HasTV" name="HasTV"><br>
+
+            <label for="RestaurantsReservations">Restaurants Reservations:</label>
+            <input type="checkbox" id="RestaurantsReservations" name="RestaurantsReservations"><br>
+
+            <label for="DogsAllowed">Dogs Allowed:</label>
+            <input type="checkbox" id="DogsAllowed" name="DogsAllowed"><br>
+
+            <label for="GoodForKids">Good For Kids:</label>
+            <input type="checkbox" id="GoodForKids" name="GoodForKids"><br>
+
+            <label for="AcceptsInsurance">Accepts Insurance:</label>
+            <input type="checkbox" id="AcceptsInsurance" name="AcceptsInsurance"><br>
+
+            <label for="BYOB">BYOB:</label>
+            <input type="checkbox" id="BYOB" name="BYOB"><br>
+
+            <label for="Open24Hours">Open 24 Hours:</label>
+            <input type="checkbox" id="Open24Hours" name="Open24Hours"><br>
+
+            <label for="RestaurantsCounterService">Restaurants Counter Service:</label>
+            <input type="checkbox" id="RestaurantsCounterService" name="RestaurantsCounterService"><br>
+
+            <label for="BusinessParking_garage">Business Parking Garage:</label>
+            <input type="checkbox" id="BusinessParking_garage" name="BusinessParking_garage"><br>
+
+            <label for="BusinessParking_street">Business Parking Street:</label>
+            <input type="checkbox" id="BusinessParking_street" name="BusinessParking_street"><br>
+
+            <label for="BusinessParking_lot">Business Parking Lot:</label>
+            <input type="checkbox" id="BusinessParking_lot" name="BusinessParking_lot"><br>
+
+            <label for="BusinessParking_valet">Business Parking Valet:</label>
+            <input type="checkbox" id="BusinessParking_valet" name="BusinessParking_valet"><br>
+
+            <!-- Submit Button -->
+            <button type="submit">Submit</button>
+
+            <!-- Randomize Button -->
+            <button type="button" id="randomizeButton">Randomize</button>
+        </form>
+
+        <!-- Navigate to Home (form page) -->
+        <p><a href="/">Go Back to Form Page</a></p>
+    </div>
+
+    <script>
+        document.getElementById("randomizeButton").addEventListener("click", function() {
+            // Function to generate a random number in a range
+            function getRandomValue(min, max) {
+                return (Math.random() * (max - min) + min).toFixed(2);
+            }
+
+            // Set random values for each field
+            document.getElementById("latitude").value = getRandomValue(-90, 90);
+            document.getElementById("longitude").value = getRandomValue(-180, 180);
+            document.getElementById("stars").value = getRandomValue(1, 5);
+            document.getElementById("review_count").value = Math.floor(Math.random() * 100);
+            
+            // Randomize checkboxes (Boolean values: true or false)
+            function randomizeCheckbox(id) {
+                document.getElementById(id).checked = Math.random() < 0.5;
+            }
+
+            randomizeCheckbox("is_open");
+            randomizeCheckbox("ByAppointmentOnly");
+            randomizeCheckbox("BusinessAcceptsCreditCards");
+            randomizeCheckbox("BikeParking");
+            randomizeCheckbox("CoatCheck");
+            randomizeCheckbox("RestaurantsTakeOut");
+            randomizeCheckbox("RestaurantsDelivery");
+            randomizeCheckbox("Caters");
+            randomizeCheckbox("WheelchairAccessible");
+            randomizeCheckbox("HappyHour");
+            randomizeCheckbox("OutdoorSeating");
+            randomizeCheckbox("HasTV");
+            randomizeCheckbox("RestaurantsReservations");
+            randomizeCheckbox("DogsAllowed");
+            randomizeCheckbox("GoodForKids");
+            randomizeCheckbox("AcceptsInsurance");
+            randomizeCheckbox("BYOB");
+            randomizeCheckbox("Open24Hours");
+            randomizeCheckbox("RestaurantsCounterService");
+            randomizeCheckbox("BusinessParking_garage");
+            randomizeCheckbox("BusinessParking_street");
+            randomizeCheckbox("BusinessParking_lot");
+            randomizeCheckbox("BusinessParking_valet");
+
+            // For numeric fields
+            document.getElementById("RestaurantsPriceRange2").value = Math.floor(Math.random() * 5);
+        });
+    </script>
+</body>
+</html>
