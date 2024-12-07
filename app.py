@@ -15,9 +15,9 @@ def load_config(config_file='config.json'):
     return config
 
 def get_model_paths(config):
-    adaboost_pickle = config.get('adaboost-pickle', '')
-    oneclasssvm_pickle = config.get('oneclasssvm-pickle', '')
-    ann_pickle = config.get('ann-tanh-pickle', '')
+    adaboost_pickle = config.get('adaboost-pickle', 'static/model/Adaboost-Model.pkl')
+    oneclasssvm_pickle = config.get('oneclasssvm-pickle', 'static/model/one_class_svm_model.pkl')
+    ann_pickle = config.get('ann-tanh-pickle', 'static/model/ann_tanh_model.h5')
     log_path = config.get('log_path', '')
     return adaboost_pickle, oneclasssvm_pickle, ann_pickle, log_path
 
