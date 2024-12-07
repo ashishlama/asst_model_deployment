@@ -3,4 +3,4 @@ numpy
 pandas
 Pillow
 gunicorn
-tensorflow-lite==2.18.0
+tensorflow-cpu==2.18.0
